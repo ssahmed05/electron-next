@@ -7,7 +7,9 @@
     "next": "next dev -p 3000",
     "electron": "wait-on http://localhost:3000 && electron .",
     "start": "next start -p 3000 && electron .",
-    "build": "next build && electron-builder"
+    "build": "next build && electron-builder",
+    "prisma": "prisma",
+    "seed": "node prisma/seeder/seed.js"
   },
   "build": {
     "appId": "com.sharique.my-electron-app",
@@ -32,6 +34,8 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@prisma/client": "^5.22.0",
+    "dotenv": "^16.4.5",
     "next": "^15.0.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -45,6 +49,7 @@
     "electron": "^33.1.0",
     "electron-builder": "^25.1.8",
     "postcss": "^8.4.47",
+    "prisma": "^5.22.0",
     "tailwindcss": "^3.4.14",
     "wait-on": "^8.0.1"
   }
