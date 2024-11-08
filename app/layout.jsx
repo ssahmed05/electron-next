@@ -1,7 +1,10 @@
-import Header from "./components/Header";
-import Sidebar from "./components/Sidebar";
+// app/layout.jsx
+
+import { useContext } from "react";
+import { AuthProvider } from "./context/AuthContext";
 import { ThemeProvider } from "./context/ThemeContext";
 import "./globals.css";
+import LayoutHandler from "./components/Layouts/LayoutHandler";
 
 export const metadata = {
   title: 'Next.js',
@@ -11,17 +14,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="flex flex-col bg-slate-100">
-        <ThemeProvider>
-          <Header />
-          <div className="flex">
-            <Sidebar />
-            <div className="p-8 w-full">
-              {children}
-            </div>
-          </div>
-        </ThemeProvider>
+      <body className="flex flex-col bg-slate-100 min-h-screen">
+        <AuthProvider>
+          <ThemeProvider>
+            <LayoutHandler>{children}</LayoutHandler>
+          </ThemeProvider>
+        </AuthProvider>
       </body>
     </html>
-  )
+  );
 }

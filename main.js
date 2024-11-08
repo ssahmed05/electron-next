@@ -8,8 +8,8 @@ let mainWindow;
 
 function createWindow() {
     mainWindow = new BrowserWindow({
-        width: 1024,
-        height: 768,
+        width: 1280,
+        height: 800,
         webPreferences: {
             nodeIntegration: false,
             contextIsolation: true,
@@ -23,8 +23,8 @@ function createWindow() {
 
     mainWindow.loadURL(startURL);
 
+    mainWindow.setMenuBarVisibility(false);
     mainWindow.webContents.on('context-menu', (e) => e.preventDefault());
-
     mainWindow.on('closed', () => (mainWindow = null));
 }
 

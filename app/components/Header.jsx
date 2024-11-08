@@ -1,13 +1,16 @@
-// app/components/Header.js
 "use client";
 
 import { useState, useContext } from 'react';
 import { FaBell, FaUserCircle, FaAdjust } from 'react-icons/fa';
 import { ThemeContext } from '../context/ThemeContext';
+import { AuthContext } from '../context/AuthContext';
+import { useRouter } from 'next/navigation';
 
 export default function Header() {
   const [activeDropdown, setActiveDropdown] = useState(null);
   const { theme, setTheme } = useContext(ThemeContext);
+  const { logout } = useContext(AuthContext);
+  const router = useRouter();
 
   const toggleDropdown = (dropdown) => {
     if (activeDropdown === dropdown) {
@@ -19,6 +22,10 @@ export default function Header() {
 
   const toggleTheme = () => {
     setTheme(theme === 'black' ? 'light' : 'black');
+  };
+
+  const handleLogout = () => {
+    logout();
   };
 
   return (
@@ -61,7 +68,7 @@ export default function Header() {
             <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded-md shadow-lg">
               <ul className="p-2">
                 <li className="p-2 border-b hover:bg-gray-100">Edit Profile</li>
-                <li className="p-2 hover:bg-gray-100">Logout</li>
+                <li className="p-2 hover:bg-gray-100" onClick={handleLogout}>Logout</li>
               </ul>
             </div>
           )}
