@@ -3,14 +3,14 @@
 
 import { useState, useContext } from 'react';
 import Link from 'next/link';
-import { FaHome, FaInfoCircle, FaEnvelope, FaUsers, FaBriefcase, FaHistory } from 'react-icons/fa';
+import { FaHome, FaInfoCircle, FaEnvelope, FaUsers, FaBriefcase, FaHistory, FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { ThemeContext } from '../context/ThemeContext';
 
 export default function Sidebar() {
   // State to manage dropdown visibility
   const [isAboutDropdownOpen, setAboutDropdownOpen] = useState(false);
   const [isContactDropdownOpen, setContactDropdownOpen] = useState(false);
-  const { theme, setTheme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
 
   // Define theme classes for black and light themes with gradient backgrounds
   const themeClasses = {
@@ -52,7 +52,9 @@ export default function Sidebar() {
           >
             <FaInfoCircle className={`mr-3 ${currentTheme.accent}`} />
             <span>About Us</span>
-            <span className="ml-auto">{isAboutDropdownOpen ? '▲' : '▼'}</span>
+            <span className="ml-auto">
+              {isAboutDropdownOpen ? <FaChevronUp /> : <FaChevronDown />}
+            </span>
           </button>
           {isAboutDropdownOpen && (
             <div className="ml-8 mt-2 space-y-2">
@@ -80,7 +82,9 @@ export default function Sidebar() {
           >
             <FaEnvelope className={`mr-3 ${currentTheme.accent}`} />
             <span>Contact Us</span>
-            <span className="ml-auto">{isContactDropdownOpen ? '▲' : '▼'}</span>
+            <span className="ml-auto">
+              {isContactDropdownOpen ? <FaChevronUp /> : <FaChevronDown />}
+            </span>
           </button>
           {isContactDropdownOpen && (
             <div className="ml-8 mt-2 space-y-2">

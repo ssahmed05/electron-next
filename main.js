@@ -1,5 +1,6 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
+require('dotenv').config();
 
 // Only set `isDev` to true if in development mode
 const isDev = process.env.NODE_ENV === 'development';
