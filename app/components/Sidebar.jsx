@@ -3,12 +3,13 @@
 
 import { useState, useContext } from 'react';
 import Link from 'next/link';
-import { FaHome, FaInfoCircle, FaEnvelope, FaUsers, FaBriefcase, FaHistory } from 'react-icons/fa';
+import { FaHome, FaInfoCircle, FaEnvelope, FaUsers, FaBriefcase, FaHistory, FaChevronCircleUp, FaChevronCircleDown, FaUserAlt } from 'react-icons/fa';
 import { ThemeContext } from '../context/ThemeContext';
 
 export default function Sidebar() {
   // State to manage dropdown visibility
   const [isAboutDropdownOpen, setAboutDropdownOpen] = useState(false);
+  const [isEmployeeDropdownOpen, setEmployeeDropdownOpen] = useState(false);
   const [isContactDropdownOpen, setContactDropdownOpen] = useState(false);
   const { theme, setTheme } = useContext(ThemeContext);
 
@@ -36,14 +37,32 @@ export default function Sidebar() {
   const currentTheme = themeClasses[theme];
 
   return (
-    <div className={`h-screen w-64 ${currentTheme.background} ${currentTheme.text} p-4 ${currentTheme.elevation} ${currentTheme.border}`}>      
+    <div className={`h-screen w-64 ${currentTheme.background} ${currentTheme.text} p-4 ${currentTheme.elevation} ${currentTheme.border}`}>
 
       <nav className="space-y-4">
         <Link href="/" className={`flex items-center p-2 rounded-md ${currentTheme.hover} transition-colors`}>
           <FaHome className={`mr-3 ${currentTheme.accent}`} />
           <span>Home</span>
         </Link>
-
+        <div>
+          <button
+            onClick={() => setEmployeeDropdownOpen(!isEmployeeDropdownOpen)}
+            className={`flex items-center w-full p-2 rounded-md ${currentTheme.hover} transition-colors`}
+          >
+            <FaUserAlt className={`mr-3 ${currentTheme.accent}`} />
+            <span>Employee</span>
+            <span className="ml-auto">{isEmployeeDropdownOpen ? <FaChevronCircleUp /> : <FaChevronCircleDown />}</span>
+          </button>
+          {isEmployeeDropdownOpen && (
+            <div className="ml-8 mt-2 space-y-2">
+              
+              <Link href="/about/team" className={`flex items-center p-2 rounded-md ${currentTheme.hover} transition-colors`}>
+                <FaUsers className={`mr-3 ${theme === 'light' ? 'text-blue-700' : 'text-blue-300'}`} />
+                <span>List</span>
+              </Link>
+            </div>
+          )}
+        </div>
         {/* About Us Link with Dropdown */}
         <div>
           <button
@@ -52,7 +71,7 @@ export default function Sidebar() {
           >
             <FaInfoCircle className={`mr-3 ${currentTheme.accent}`} />
             <span>About Us</span>
-            <span className="ml-auto">{isAboutDropdownOpen ? '▲' : '▼'}</span>
+            <span className="ml-auto">{isAboutDropdownOpen ? <FaChevronCircleUp /> : <FaChevronCircleDown />}</span>
           </button>
           {isAboutDropdownOpen && (
             <div className="ml-8 mt-2 space-y-2">
@@ -80,7 +99,7 @@ export default function Sidebar() {
           >
             <FaEnvelope className={`mr-3 ${currentTheme.accent}`} />
             <span>Contact Us</span>
-            <span className="ml-auto">{isContactDropdownOpen ? '▲' : '▼'}</span>
+            <span className="ml-auto">{isContactDropdownOpen ? <FaChevronCircleUp /> : <FaChevronCircleDown />}</span>
           </button>
           {isContactDropdownOpen && (
             <div className="ml-8 mt-2 space-y-2">
